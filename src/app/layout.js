@@ -1,7 +1,6 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from 'next-themes'
-const inter = Inter({ subsets: ["latin"] });
+import Navbar from "@/components/Navbar";
 
 export const metadata = {
   title: "Create Next App",
@@ -13,6 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
         <body className="  text-xl font-Comic_Neue">
           <ThemeProvider attribute="class">
+            <Navbar/>
             {children}
           </ThemeProvider>
         </body>

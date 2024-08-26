@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        Comic_Neue: ["Comic Neue", "cursive"],
+        Comic_Neue: ["Comic Neue"],
       },
      
       backgroundImage: {
