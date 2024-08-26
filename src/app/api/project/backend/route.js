@@ -1,4 +1,4 @@
-import Project from "@/model/project";
+import Project from "@/model/backendProject";
 import { dbConnect } from "@/lib/dbConfig";
 import { NextResponse } from "next/server";
 import { uploadOnCloudinary } from "@/lib/cloudnery";
