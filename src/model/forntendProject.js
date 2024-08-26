@@ -21,10 +21,10 @@ const projectSchema = new mongoose.Schema({
         type: [String],
         required: true,
     },
-}, {
+},{
     timestamps: true, 
 });
 
-const Project = mongoose.models.Project ||  mongoose.model('Project', projectSchema);
+const forntendProject = mongoose.models.forntendProject ||  mongoose.model('forntendProject', projectSchema);
 
-export default Project;
+export default forntendProject;
