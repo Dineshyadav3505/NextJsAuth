@@ -1,6 +1,7 @@
 import "./globals.css";
 import { ThemeProvider } from 'next-themes'
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Create Next App",
@@ -10,10 +11,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-        <body className="  text-xl font-Comic_Neue">
-          <ThemeProvider attribute="class">
+        <body className="text-xl font-Comic_Neue bg-black text-white">
+          <ThemeProvider attribute="class" className="">
             <Navbar/>
             {children}
+            <Footer/>
           </ThemeProvider>
         </body>
     </html>

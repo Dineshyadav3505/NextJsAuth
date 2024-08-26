@@ -12,7 +12,7 @@ const ButtonThree = ({label, link}) => {
   return (
     <Link 
     href={link}
-    className='px-1 capitalize text-sm w-32 flex justify-between items-center gap-2 hover:bg-zinc-700/70 rounded-md' 
+    className='capitalize py-2 px-3 text-sm w-full flex justify-between items-center gap-2 hover:bg-zinc-700/70 rounded-md' 
      >
     {label}
     <svg

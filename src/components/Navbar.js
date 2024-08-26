@@ -14,24 +14,12 @@ const Navbar = () => {
   };
 
   return (
-    <nav className=" fixed z-20 top-0 w-full py-5 flex justify-between px-2 md:px-10 items-center">
+    <nav className=" select-none fixed z-20 top-0 w-full py-5 flex justify-between px-2 md:px-10 items-center">
       {/* logo */}
-      <div className="py-2 px-3 flex justify-start items-center gap-2 ">
-        <div className="">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-            />
-          </svg>
+      <div className="py-2 px-3 flex justify-start items-center gap-3">
+        <div className="border-[rgba(114,112,112,0.5)] bg-[rgba(114,112,112,0.3)] border-[1px] px-2 p-1 rounded">
+          <p className="font-mono text-sm bprder-[1px] ">35</p>
+          <p className="font-mono text-sm">05</p>
         </div>
         <span className="">
           <h2 className="text-lg hidden md:block capitalize font-sans">
@@ -113,7 +101,7 @@ const Navbar = () => {
       {nav && <motion.div 
       layout="true"
         initial={{ opacity: 0, height: 2, width: 2 }}
-        animate={{ opacity: 1, height: 60, width: 140 }}
+        animate={{ opacity: 1, height: 85, width: 170 }}
         transition={{ duration: 0.5 }}
 
 
