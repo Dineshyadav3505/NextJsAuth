@@ -11,6 +11,7 @@ const ButtonThree = ({label, link}) => {
 
   return (
     <Link 
+    target='_blank'
     href={link}
     className='capitalize py-2 px-3 text-sm w-full flex justify-between items-center gap-2 hover:bg-zinc-700/70 rounded-md' 
      >

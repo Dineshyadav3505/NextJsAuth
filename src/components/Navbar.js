@@ -36,7 +36,7 @@ const Navbar = () => {
       </div>
 
       {/* Link */}
-      <div className="py-2 px-3 justify-end flex gap-2 ">
+      <div className="py-2 px-3 justify-end flex gap-2 lg:w-1/5 ">
         <div
           onClick={handleNav}
           className="h-10 w-10 md:hidden border-[1px] flex justify-center items-center rounded-full bg-[rgba(114,112,112,0.3)]"
@@ -94,6 +94,7 @@ const Navbar = () => {
           label={"linkedIn"}
           link={"https://www.linkedin.com/in/dinesh-yadav-6aa877198"}
         />
+                <ButtonOne label={"github"} link={"https://github.com/Dineshyadav3505"}/>
         <ButtonOne label={"Resume"} link={"/Resume"} />
       </div>
 
@@ -101,12 +102,13 @@ const Navbar = () => {
       {nav && <motion.div 
       layout="true"
         initial={{ opacity: 0, height: 2, width: 2 }}
-        animate={{ opacity: 1, height: 85, width: 170 }}
+        animate={{ opacity: 1, height: 120, width: 170 }}
         transition={{ duration: 0.5 }}
 
 
       className=" absolute z-10 top-24 flex flex-col justify-center items-center right-3 bg-[rgba(114,112,112,0.3)] border-[1px] rounded-md border-[rgba(114,112,112,0.7)] p-1 ">
         <ButtonThree label={"linkedIn"} link={"https://www.linkedin.com/in/dinesh-yadav-6aa877198"}/>
+        <ButtonThree label={"github"} link={"https://github.com/Dineshyadav3505"}/>
         <ButtonThree label={"Resume"} link={"/Resume"}/>
       </motion.div>}
     </nav>

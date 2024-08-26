@@ -20,6 +20,10 @@ const Footer = () => {
           name: "linkedin",
           url: "https://www.linkedin.com/in/dinesh-yadav-6aa877198",
         },
+        {
+          name: "github",
+          url: "https://github.com/Dineshyadav3505",
+        },
         { name: "resume", url: "/resume" },
       ],
     },
@@ -48,7 +52,7 @@ const Footer = () => {
                       {" "}
                       <Link
                         href={item.url}
-                        className="text-base capitalize inline-block py-2 "
+                        className="text-base capitalize inline-block py-2 hover:scale-110 duration-200"
                       >
                         {item.name}
                       </Link>{" "}
@@ -70,10 +74,24 @@ const Footer = () => {
                       {" "}
                       <Link
                         target="_blanck"
-                        className="text-base capitalize inline-block py-2 "
+                        className="text-base capitalize py-2 flex gap-2 items-center hover:scale-110 duration-200"
                         href={item.url}
                       >
                         {item.name}
+                        <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="size-3 duration-500 -rotate-45 "
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+        />
+      </svg>
                       </Link>{" "}
                     </li>
                   ))}

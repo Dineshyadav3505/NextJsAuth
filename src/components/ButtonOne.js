@@ -14,7 +14,7 @@ const ButtonOne = ({ label, link }) => {
       onMouseLeave={handleMouseEnter}
       target="_blank"
       href={link}
-      className="text-base capitalize hidden md:flex justify-center px-4 gap-1 py-1 hover:bg-zinc-700/20 duration-500 rounded-full items-center"
+      className="text-base capitalize hidden md:flex justify-center px-4 gap-1 py-1 hover:bg-zinc-700/60 duration-500 rounded-full items-center"
     >
       {label}
       <svg
