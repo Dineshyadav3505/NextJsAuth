@@ -95,7 +95,7 @@ const Navbar = () => {
           link={"https://www.linkedin.com/in/dinesh-yadav-6aa877198"}
         />
                 <ButtonOne label={"github"} link={"https://github.com/Dineshyadav3505"}/>
-        <ButtonOne label={"Resume"} link={"/Resume"} />
+        <ButtonOne label={"Resume"} link={"/resume"} />
       </div>
 
       {/* mobile Link */}
@@ -104,12 +104,10 @@ const Navbar = () => {
         initial={{ opacity: 0, height: 2, width: 2 }}
         animate={{ opacity: 1, height: 120, width: 170 }}
         transition={{ duration: 0.5 }}
-
-
       className=" absolute z-10 top-24 flex flex-col justify-center items-center right-3 bg-[rgba(114,112,112,0.3)] border-[1px] rounded-md border-[rgba(114,112,112,0.7)] p-1 ">
         <ButtonThree label={"linkedIn"} link={"https://www.linkedin.com/in/dinesh-yadav-6aa877198"}/>
         <ButtonThree label={"github"} link={"https://github.com/Dineshyadav3505"}/>
-        <ButtonThree label={"Resume"} link={"/Resume"}/>
+        <ButtonThree label={"resume"} link={"/Resume"}/>
       </motion.div>}
     </nav>
   );
