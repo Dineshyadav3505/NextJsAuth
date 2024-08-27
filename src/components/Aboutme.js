@@ -11,9 +11,8 @@ const Aboutme = () => {
 
       {/* about me passage */}
       <p className="py-3 md:py-9 text-3xl md:text-5xl lg:leading-[50px] tracking-tighter drop-shadow-[0_0px_15px_rgba(255,255,255,0.6)]">
-        I'm passionate about creating Web Designs that
+        I&#39;m passionate about creating Web Designs that
         <span className=" font-Gloock tracking-wide">
-          {" "}
           empower and engage people.
         </span>
       </p>

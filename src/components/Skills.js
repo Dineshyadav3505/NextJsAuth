@@ -1,27 +1,41 @@
-import Skill from "@/model/skills";
+"use client";
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Skills = () => {
 
-  const skills = [
-    {
-      domain: "Programming Languages",
-      skills: ["HTML", "CSS", "Tailwind CSS", "JavaScript", "TypeScript"],
-    },
-    {
-      domain: "Libraries & Framework",
-      skills: ["ReactJs", "Angular", "Redux", "Express", "NextJs", "NodeJs"],
-    },
-    {
-      domain: "Database Technologies",
-      skills: ["SQL", "MongoDB"],
-    },
-    {
-      domain: "Additional Skills",
-      skills: ["DOM Manipulation", "API Gateway", "ContextAPI", "Front-End Development", "Full-Stack Development", "AWS", "Git", "GitHub"],
-    },
-  ];
+    const [skills, setSkills] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+  
+    useEffect(() => {
+      const fetchSkills = async () => {
+        try {
+          const response = await fetch("/api/skill");
+          
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+  
+          const data = await response.json();
+          setSkills(data.skills);
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchSkills();
+    }, []); 
+  
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+  
+    if (error) {
+      return <div>Error: {error}</div>;
+    }
 
   return (
     <div>
@@ -32,7 +46,7 @@ const Skills = () => {
       </h1>
 
       <div className="w-full relative rounded-md border-[1px] p-3 border-[rgba(114,112,112,0.5)] bg-[rgba(114,112,112,0.3)] grid md:grid-cols-2 md:grid-rows-2 gap-3 ">
-        {skills.map((skill, index) => (
+        {skills?.map((skill, index) => (
           <div key={index} className="rounded md:flex-row select-none border-[1px] p-3 border-[rgba(114,112,112,0.5)] items-center min-h-36 ">
 
             <h1 className="py-4 text-lg">{skill.domain}</h1>

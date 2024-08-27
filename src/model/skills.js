@@ -7,10 +7,13 @@ const resumeSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    skills: {
-      type: [String],
-      required: true,
-    },
+    skills: [
+      {
+        type: String,
+        required: true,
+        trim: true,
+      },
+    ],
   },
   { timestamps: true }
 );
