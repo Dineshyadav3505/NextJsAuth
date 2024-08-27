@@ -3,39 +3,38 @@ import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 
 const Skills = () => {
+  const [skills, setSkills] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    const [skills, setSkills] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-  
-    useEffect(() => {
-      const fetchSkills = async () => {
-        try {
-          const response = await fetch("/api/skill");
-          
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-  
-          const data = await response.json();
-          setSkills(data.skills);
-        } catch (err) {
-          setError(err.message);
-        } finally {
-          setLoading(false);
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        const response = await fetch("/api/skill");
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
-      };
-  
-      fetchSkills();
-    }, []); 
-  
-    if (loading) {
-      return <div>Loading...</div>;
-    }
-  
-    if (error) {
-      return <div>Error: {error}</div>;
-    }
+
+        const data = await response.json();
+        setSkills(data.skills);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSkills();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div>
@@ -47,21 +46,24 @@ const Skills = () => {
 
       <div className="w-full relative rounded-md border-[1px] p-3 border-[rgba(114,112,112,0.5)] bg-[rgba(114,112,112,0.3)] grid md:grid-cols-2 md:grid-rows-2 gap-3 ">
         {skills?.map((skill, index) => (
-          <div key={index} className="rounded md:flex-row select-none border-[1px] p-3 border-[rgba(114,112,112,0.5)] items-center min-h-36 ">
-
+          <div
+            key={index}
+            className="rounded md:flex-row select-none border-[1px] p-3 border-[rgba(114,112,112,0.5)] items-center min-h-36 "
+          >
             <h1 className="py-4 text-lg">{skill.domain}</h1>
 
             <div className="flex gap-3 p-2  flex-wrap  ">
               {skill.skills.map((subSkill, subIndex) => (
-                <h5 className="border-[rgba(114,112,112,0.5)] rounded border-[1px] px-3 py-1 text-sm " key={subIndex}>{subSkill}</h5>
+                <h5
+                  className="border-[rgba(114,112,112,0.5)] rounded border-[1px] px-3 py-1 text-sm "
+                  key={subIndex}
+                >
+                  {subSkill}
+                </h5>
               ))}
             </div>
           </div>
         ))}
-
-
-
-
       </div>
     </div>
   );

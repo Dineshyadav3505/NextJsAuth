@@ -1,9 +1,15 @@
+"use client";
 import Aboutme from "@/components/Aboutme";
 import Skills from "@/components/Skills";
-import React from "react";
+import React, { useEffect } from "react";
+import LocomotiveScroll from 'locomotive-scroll';
+import Anim from "@/components/Anim";
 
 const page = () => {
+
   return (
+    <>
+    <Anim/>
     <div className="min-h-screen py-28 lg:px-52">
       <div className="p-4 md:p-8">
         <Aboutme/>
@@ -11,6 +17,7 @@ const page = () => {
         <Skills/>
       </div>
     </div>
+    </>
   );
 };
 
