@@ -30,13 +30,6 @@ const Skills = () => {
 
   let ref = useRef(null);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
 
   return (
     <motion.div 
