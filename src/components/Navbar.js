@@ -38,8 +38,14 @@ const Navbar = () => {
     setNav(!nav);
   };
 
+  
   return (
-    <nav className=" select-none fixed z-20 top-0 w-full py-5 flex justify-between px-2 md:px-10 items-center">
+    <motion.nav 
+    initial={{ opacity: 0, y:"-100px" }}
+    animate={{ opacity: 1, y:0 }}
+    transition={{ duration: 1, delay: 2 }}
+    className=" select-none fixed z-20 top-0 w-full py-5 flex justify-between px-2 md:px-10 items-center">
+
       {/* logo */}
       <div className="py-2 px-3 flex justify-start items-center gap-3">
         <div className="border-[rgba(114,112,112,0.5)] bg-[rgba(114,112,112,0.3)] border-[1px] px-2 p-1 rounded">
@@ -146,7 +152,7 @@ const Navbar = () => {
           <ButtonThree label={"resume"} link={resume} />
         </motion.div>
       )}
-    </nav>
+    </motion.nav>
   );
 };
 

@@ -2,7 +2,6 @@
 import Aboutme from "@/components/Aboutme";
 import Skills from "@/components/Skills";
 import React, { useEffect } from "react";
-import LocomotiveScroll from 'locomotive-scroll';
 import Anim from "@/components/Anim";
 
 const page = () => {
