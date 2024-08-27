@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       fontFamily: {
         Comic_Neue: ["Comic Neue"],
+        Gloock:["Gloock"],
       },
      
       backgroundImage: {

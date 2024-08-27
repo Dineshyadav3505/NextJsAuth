@@ -36,17 +36,8 @@ export async function POST(req) {
       );
     }
 
-    const img = await uploadOnCloudinary(resumeImage, "projectImage");
-
-    if (!img) {
-      return NextResponse.json(
-        { message: "Error while uploading image" },
-        { status: 500 }
-      );
-    }
-
     const resume = await Resume.create({
-      resumeImage: img.secure_url,
+      resumeImage,
     });
 
     return NextResponse.json(
@@ -109,15 +100,6 @@ export async function PATCH(req) {
       );
     }
 
-    const img = await uploadOnCloudinary(resumeImage, "projectImage");
-
-    if (!img) {
-      return NextResponse.json(
-        { message: "Error while uploading image" },
-        { status: 500 }
-      );
-    }
-
     const url = new URL(req.url);
     const searchParams = new URLSearchParams(url.search);
     const resumeId = searchParams.get("id");
@@ -125,7 +107,7 @@ export async function PATCH(req) {
     const resume = await Resume.findByIdAndUpdate(
       resumeId,
       {
-        resumeImage: img.secure_url,
+        resumeImage,
       },
       { new: true }
     );

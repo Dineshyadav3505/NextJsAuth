@@ -1,7 +1,36 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Footer = () => {
+
+  const [ resume, setResume] = useState("");
+
+  useEffect(() => {
+    const fetchResume = async () => {
+      try {
+        const response = await fetch("/api/resume", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch resume");
+        }
+
+        const data = await response.json();
+        setResume(data.resume[0].resumeImage); 
+
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchResume();
+  }, []);
+
   const link = [
     {
       title: "MAIN",
@@ -24,12 +53,12 @@ const Footer = () => {
           name: "github",
           url: "https://github.com/Dineshyadav3505",
         },
-        { name: "resume", url: "/resume" },
+        { name: "resume", url: resume },
       ],
     },
   ];
   return (
-    <footer className="">
+    <footer className=" select-none">
       <div className="py-10 lg:py-16 md:grid md:grid-flow-col md:grid-cols-5 ">
         <div className="hidden md:flex items-center md:col-span-3 pl-36">
           <div className="border-[rgba(114,112,112,0.5)] bg-[rgba(114,112,112,0.3)] border-[1px] px-2 p-1 rounded">

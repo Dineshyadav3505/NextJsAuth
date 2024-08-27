@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { Children, useEffect, useState } from "react";
 import ButtonOne from "./ButtonOne";
 import Image from "next/image";
 import ButtonSec from "./ButtonSec";
@@ -7,6 +7,33 @@ import { motion } from "framer-motion";
 import ButtonThree from "./ButtonThree";
 
 const Navbar = () => {
+  const [ resume, setResume] = useState("");
+
+  useEffect(() => {
+    const fetchResume = async () => {
+      try {
+        const response = await fetch("/api/resume", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch resume");
+        }
+
+        const data = await response.json();
+        setResume(data.resume[0].resumeImage); 
+
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchResume();
+  }, []);
+  
   const [nav, setNav] = useState(false);
 
   const handleNav = () => {
@@ -95,7 +122,7 @@ const Navbar = () => {
           link={"https://www.linkedin.com/in/dinesh-yadav-6aa877198"}
         />
                 <ButtonOne label={"github"} link={"https://github.com/Dineshyadav3505"}/>
-        <ButtonOne label={"Resume"} link={"/resume"} />
+        <ButtonOne label={"Resume"} link={resume} />
       </div>
 
       {/* mobile Link */}
@@ -104,10 +131,10 @@ const Navbar = () => {
         initial={{ opacity: 0, height: 2, width: 2 }}
         animate={{ opacity: 1, height: 120, width: 170 }}
         transition={{ duration: 0.5 }}
-      className=" absolute z-10 top-24 flex flex-col justify-center items-center right-3 bg-[rgba(114,112,112,0.3)] border-[1px] rounded-md border-[rgba(114,112,112,0.7)] p-1 ">
+      className=" absolute z-10 top-24 flex flex-col justify-center items-center right-3 bg-[rgba(114,112,112,0.6)] border-[1px] rounded-md border-[rgba(114,112,112,0.7)] p-1 ">
         <ButtonThree label={"linkedIn"} link={"https://www.linkedin.com/in/dinesh-yadav-6aa877198"}/>
         <ButtonThree label={"github"} link={"https://github.com/Dineshyadav3505"}/>
-        <ButtonThree label={"resume"} link={"/Resume"}/>
+        <ButtonThree label={"resume"} link={resume}/>
       </motion.div>}
     </nav>
   );
