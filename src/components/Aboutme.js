@@ -20,7 +20,7 @@ const Aboutme = () => {
           <motion.span 
             initial={{ opacity: 0, y:"70px"}}
             animate={{ opacity: 1, y:"0px"}}
-            transition={{ duration: .7, delay: 2.5 }}
+            transition={{ duration: .7, delay: 2.5,  ease: [0.33, 1, 0.68, 1] }}
           className="py-3 md:py-9 inline-block text-3xl md:text-5xl lg:leading-[50px] tracking-tighter drop-shadow-[0_0px_15px_rgba(255,255,255,0.6)]">
             I&#39;m passionate about creating Web Designs that <span className=" font-Gloock tracking-wide">
               empower and engage people.
