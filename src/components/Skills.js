@@ -28,7 +28,7 @@ const Skills = () => {
     fetchSkills();
   }, []);
 
-  let ref = useRef(null);
+  const constraintsRef = useRef(null)
 
 
   return (
@@ -42,14 +42,14 @@ const Skills = () => {
         Skills
       </h1>
 
-      <div ref={ref} 
+      <motion.div ref={constraintsRef} 
 
       className="w-full relative rounded-md border-[1px] p-3 border-[rgba(114,112,112,0.5)] bg-[rgba(114,112,112,0.3)] grid md:grid-cols-2 md:grid-rows-2 gap-3 ">
 
         {skills?.map((skill, index) => (
           <motion.div
             drag
-            dragConstraints={ref}
+            dragConstraints={constraintsRef}
             key={index}
             
             className="rounded md:flex-row select-none border-[1px] p-3 border-[rgba(114,112,112,0.5)] items-center min-h-36 "
@@ -68,7 +68,7 @@ const Skills = () => {
             </div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </motion.div>
   );
 };
