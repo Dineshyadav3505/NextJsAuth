@@ -35,6 +35,8 @@ export async function POST(req) {
       description: formData.get("description"),
       projectLink: formData.get("projectLink"),
       imageLink: formData.get("imageLink"),
+      githubLink: formData.get("githubLink"),
+      liveLink: formData.get("liveLink"),
     };
 
     const technologies = formData.getAll("technologies");
@@ -54,6 +56,8 @@ export async function POST(req) {
       projectLink,
       technologies,
       imageLink: img.secure_url,
+      githubLink,
+      liveLink,
     });
 
     project.save();
@@ -164,6 +168,8 @@ export async function PATCH(req) {
       description: formData.get("description"),
       projectLink: formData.get("projectLink"),
       imageLink: formData.get("imageLink"),
+      githubLink: formData.get("githubLink"),
+      liveLink: formData.get("liveLink"),
     };
 
     const technologies = formData.getAll("technologies");
@@ -195,6 +201,8 @@ export async function PATCH(req) {
     project.projectLink = projectLink;
     project.technologies = technologies;
     project.imageLink = img.secure_url;
+    project.githubLink = githubLink;
+    project.liveLink = liveLink;
 
     project.save();
 
