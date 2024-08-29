@@ -1,52 +1,57 @@
 "use client";
-import { easeInOut, motion } from 'framer-motion'
-import { useTransform, useViewportScroll } from 'framer-motion'
+import { motion, useAnimation, useInView } from "framer-motion";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
-import Link from 'next/link'
-import React, { useState } from 'react'
-
-const Project = () => {
-
-  const [hover, setHover] = useState(false)
-  const { scrollYProgress } = useViewportScroll()
-  console.log(scrollYProgress.prev)
-  const scale = useTransform(scrollYProgress, [0, 0.03], [0.8, 1]);
+const ScalingDiv = () => {
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { margin: "0px", once: false });
+  const [ isHovered, setIsHovered ] = useState(false);
 
   const handleMouseEnter = () => {
-    setHover(!hover)
+    setIsHovered(!isHovered);
   }
 
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start({ scale: 1, transition: { duration: 0.5 } });
+    } else {
+      controls.start({ scale: 0.8, transition: { duration: 0.5 } });
+    }
+  }, [controls, isInView]); 
+
   return (
-    <motion.div 
-    style={{ scale , scaleY: scrollYProgress}}
+    <motion.div
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseEnter}
+      ref={ref}
+      initial={{ scale: 0.8 }}
+      animate={controls}
+      className="rounded-lg select-none w-full p-2 border-[rgba(114,112,112,0.5)] bg-[rgba(114,112,112,0.3)] border-[1px]"
+    >
+      <div className=" h-[500px] relative rounded-sm border-[rgba(114,112,112,0.5)] border-[1px]">
+        <img className="h-full w-full object-cover" src="https://images.unsplash.com/photo-1719937206220-f7c76cc23d78?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
 
-    onMouseEnter={handleMouseEnter}
-    onMouseLeave={handleMouseEnter}
-    className='border-[rgba(114,112,112,0.5)] bg-[rgba(114,112,112,0.3)] border-[1px] p-2 rounded-lg'>
-      <div className="border-[rgba(114,112,112,0.5)] relative overflow-hidden border-[1px] h-[600px] rounded">
-        <img className='object-cover h-full' src="https://images.unsplash.com/photo-1723754165998-305df32c501e?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
-
-        {hover && <motion.div
-          initial={{ y: "100%"}}
-          animate={{ y: "0%"}}
-          transition={{ duration: .7, ease: easeInOut}}
-          exit
-         className=" absolute bottom-0 w-full p-3 md:flex">
-          <div className="md:w-full flex flex-col">
-            <h1 className=' text-lg capitalize drop-shadow-[0_0px_10px_rgba(0,0,0,1)]'>project name</h1>
-            <div className="flex  gap-2 flex-wrap py-1">
-            <p className='px-3 py-1 rounded text-xs border-[1px] inline-block drop-shadow-[0_0px_10px_rgba(0,0,0,1)]'>Express</p>
-            <p className='px-3 py-1 rounded text-xs border-[1px] inline-block drop-shadow-[0_0px_10px_rgba(0,0,0,1)]'>Nodesjs</p>
+        {isHovered && <div className=" absolute bottom-0 w-full flex p-2">
+          <div className=" w-full">
+            <p className="text-xl drop-shadow-[0_0px_15px_rgba(0,0,0,1)] py-2 ">Project Name  </p>
+            <div className=" flex items-center gap-2">
+            <p className="text-sm drop-shadow-[0_0px_15px_rgba(0,0,0,1)] px-3 py-1 border-[1px] inline-block rounded-md capitalize "> react.js</p>
+            <p className="text-sm drop-shadow-[0_0px_15px_rgba(0,0,0,1)] px-3 py-1 border-[1px] inline-block rounded-md capitalize "> react.js</p>
             </div>
+
           </div>
-          <div className="flex justify-end px-3 items-center">
-            <Link className=' text-sm  px-4 py-1 bg-[#313030] hover:px-5 duration-500 hover:bg-black rounded-2xl capitalize' target='_blanck' href="#">github</Link>
-            <Link className=' text-sm  px-4 py-1 bg-[#313030] hover:px-5 duration-500 hover:bg-black rounded-2xl capitalize' target='_blanck' href="#">live</Link>
-          </div>
-        </motion.div>}
+         <div className=" flex flex-col justify-center items-end px-3 w-1/3">
+           <Link className=" px-4 hover:px-5 duration-300 capitalize py-1 drop-shadow-[0_0px_15px_rgba(0,0,0,1)] hover:bg-black bg-[rgba(114,112,112,0.3)] text-sm rounded-full " href="/" target="_blanck">Live link</Link>
+           <Link className=" px-4 hover:px-5 duration-300 capitalize py-1 drop-shadow-[0_0px_15px_rgba(0,0,0,1)] hover:bg-black bg-[rgba(114,112,112,0.3)] text-sm rounded-full " href="/" target="_blanck">github link </Link>
+         </div>
+
+        </div>}
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default Project;
+export default ScalingDiv;
