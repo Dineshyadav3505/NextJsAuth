@@ -10,7 +10,7 @@ export async function POST(req) {
   await dbConnect();
 
   try {
-    // Check if the user is authenticated
+
     if (!id) {
       return NextResponse.json(
         { message: "You are not authorized to access this route" },
@@ -18,7 +18,6 @@ export async function POST(req) {
       );
     }
 
-    // Fetch the user from the database
     const dataBaseUser = await User.findById(id);
     if (!dataBaseUser || dataBaseUser.role !== "admin") {
       return NextResponse.json(
@@ -27,7 +26,6 @@ export async function POST(req) {
       );
     }
 
-    // Parse form data
     const formData = await req.formData();
     const name = formData.get("name");
     const description = formData.get("description");
@@ -142,29 +140,30 @@ export async function DELETE(req) {
 }
 
 export async function PATCH(req) {
-  console.log("PUT request");
   const id = await auth(req);
   await dbConnect();
-   try {
 
+  try {
+    // Check if user is authenticated
     if (!id) {
       return NextResponse.json(
         { message: "You are not authorized to access this route" },
         { status: 401 }
       );
     }
-    
-    const dataBaseUser = await User.findById(id);
 
-    if (dataBaseUser.role !== "admin") {
+    // Fetch user from the database
+    const dataBaseUser = await User.findById(id);
+    if (!dataBaseUser || dataBaseUser.role !== "admin") {
       return NextResponse.json(
         { message: "You are not authorized to access this route" },
         { status: 401 }
       );
     }
 
+    // Parse form data
     const formData = await req.formData();
-    const { name, description, projectLink, imageLink } = {
+    const { name, description, projectLink, imageLink, githubLink, liveLink } = {
       name: formData.get("name"),
       description: formData.get("description"),
       projectLink: formData.get("projectLink"),
@@ -175,19 +174,20 @@ export async function PATCH(req) {
 
     const technologies = formData.getAll("technologies");
 
-    if (!name || !description || !projectLink || !technologies || !imageLink) {
+    // Validate required fields
+    if (!name || !description || !projectLink || !technologies.length || !imageLink) {
       return NextResponse.json(
         { message: "Please fill all the fields" },
         { status: 400 }
       );
     }
 
+    // Extract project ID from the request URL
     const url = new URL(req.url);
-    const searchParams = new URLSearchParams(url.search);
-    const projectId = searchParams.get("id");
+    const projectId = url.searchParams.get("id");
 
-    const project = await Project.findById(projectId);  
-
+    // Fetch the project from the database
+    const project = await Project.findById(projectId);
     if (!project) {
       return NextResponse.json(
         { message: "Project not found" },
@@ -195,17 +195,20 @@ export async function PATCH(req) {
       );
     }
 
+    // Upload image to Cloudinary
     const img = await uploadOnCloudinary(imageLink, "projectImage");
 
+    // Update project details
     project.name = name;
     project.description = description;
     project.projectLink = projectLink;
     project.technologies = technologies;
-    project.imageLink = img.secure_url;
+    project.imageLink = img.secure_url; // Ensure this is the correct property for the URL
     project.githubLink = githubLink;
     project.liveLink = liveLink;
 
-    project.save();
+    // Save the updated project
+    await project.save(); // Ensure to await the save operation
 
     return NextResponse.json(
       {
@@ -214,14 +217,12 @@ export async function PATCH(req) {
       },
       { status: 200 }
     );
-    
-    
 
-   } catch (error) {
+  } catch (error) {
     console.error("Error while trying to update project", error);
     return NextResponse.json(
       { message: "Error while trying to update project" },
       { status: 500 }
     );
-   }
+  }
 }
