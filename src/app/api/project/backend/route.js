@@ -32,7 +32,6 @@ export async function POST(req) {
     const { name, description, projectLink, imageLink, githubLink, liveLink } = {
       name: formData.get("name"),
       description: formData.get("description"),
-      projectLink: formData.get("projectLink"),
       imageLink: formData.get("imageLink"),
       githubLink: formData.get("githubLink"),
       liveLink: formData.get("liveLink"),
@@ -41,7 +40,7 @@ export async function POST(req) {
     const technologies = formData.getAll("technologies");
 
     // Validate required fields
-    if (!name || !description || !projectLink || !technologies.length || !imageLink) {
+    if (!name || !description || !technologies.length || !imageLink) {
       return NextResponse.json(
         { message: "Please fill all the fields" },
         { status: 400 }
@@ -55,7 +54,6 @@ export async function POST(req) {
     const project = await Project.create({
       name,
       description,
-      projectLink,
       technologies,
       imageLink: img.secure_url, // Ensure this is the correct property for the URL
       githubLink,
@@ -168,7 +166,6 @@ export async function PATCH(req) {
     const { name, description, projectLink, imageLink, githubLink, liveLink } = {
       name: formData.get("name"),
       description: formData.get("description"),
-      projectLink: formData.get("projectLink"),
       imageLink: formData.get("imageLink"),
       githubLink: formData.get("githubLink"),
       liveLink: formData.get("liveLink"),
@@ -177,7 +174,7 @@ export async function PATCH(req) {
     const technologies = formData.getAll("technologies");
 
     // Validate required fields
-    if (!name || !description || !projectLink || !technologies.length || !imageLink) {
+    if (!name || !description || !technologies.length || !imageLink) {
       return NextResponse.json(
         { message: "Please fill all the fields" },
         { status: 400 }
@@ -203,7 +200,6 @@ export async function PATCH(req) {
     // Update project details
     project.name = name;
     project.description = description;
-    project.projectLink = projectLink;
     project.technologies = technologies;
     project.imageLink = img.secure_url; // Ensure this is the correct property for the URL
     project.githubLink = githubLink;

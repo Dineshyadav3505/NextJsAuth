@@ -29,18 +29,13 @@ export async function POST(req) {
     const formData = await req.formData();
     const name = formData.get("name");
     const description = formData.get("description");
-    const projectLink = formData.get("projectLink");
     const imageLink = formData.get("imageLink");
     const githubLink = formData.get("githubLink");
     const liveLink = formData.get("liveLink");
     const technologies = formData.getAll("technologies");
 
-    // Log the received data for debugging
-    console.log("technologies", technologies);
-    console.log(name, description, projectLink, imageLink, technologies, githubLink, liveLink);
-
     // Validate required fields
-    if (!name || !description || !projectLink || !technologies.length || !imageLink) {
+    if (!name || !description || !technologies.length || !imageLink) {
       return NextResponse.json(
         { message: "Please fill all the fields" },
         { status: 400 }
@@ -54,7 +49,6 @@ export async function POST(req) {
     const project = await Project.create({
       name,
       description,
-      projectLink,
       technologies,
       imageLink: img.secure_url, // Use the secure URL from Cloudinary
       githubLink,
@@ -163,7 +157,7 @@ export async function PATCH(req) {
 
     // Parse form data
     const formData = await req.formData();
-    const { name, description, projectLink, imageLink, githubLink, liveLink } = {
+    const { name, description, imageLink, githubLink, liveLink } = {
       name: formData.get("name"),
       description: formData.get("description"),
       projectLink: formData.get("projectLink"),
@@ -175,7 +169,7 @@ export async function PATCH(req) {
     const technologies = formData.getAll("technologies");
 
     // Validate required fields
-    if (!name || !description || !projectLink || !technologies.length || !imageLink) {
+    if (!name || !description || !technologies.length || !imageLink) {
       return NextResponse.json(
         { message: "Please fill all the fields" },
         { status: 400 }
