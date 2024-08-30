@@ -10,57 +10,58 @@ export async function POST(req) {
   await dbConnect();
 
   try {
+    // Check if the user is authenticated
     if (!id) {
       return NextResponse.json(
         { message: "You are not authorized to access this route" },
         { status: 401 }
       );
     }
-    const dataBaseUser = await User.findById(id);
 
-    if (dataBaseUser.role !== "admin") {
+    // Fetch the user from the database
+    const dataBaseUser = await User.findById(id);
+    if (!dataBaseUser || dataBaseUser.role !== "admin") {
       return NextResponse.json(
         { message: "You are not authorized to access this route" },
         { status: 401 }
       );
     }
 
+    // Parse form data
     const formData = await req.formData();
-
-    const user = req.user;
-    console.log("user", user);
-
-    const { name, description, projectLink, imageLink } = {
-      name: formData.get("name"),
-      description: formData.get("description"),
-      projectLink: formData.get("projectLink"),
-      imageLink: formData.get("imageLink"),
-      githubLink: formData.get("githubLink"),
-      liveLink: formData.get("liveLink"),
-    };
-
+    const name = formData.get("name");
+    const description = formData.get("description");
+    const projectLink = formData.get("projectLink");
+    const imageLink = formData.get("imageLink");
+    const githubLink = formData.get("githubLink");
+    const liveLink = formData.get("liveLink");
     const technologies = formData.getAll("technologies");
 
-    if (!name || !description || !projectLink || !technologies || !imageLink) {
+    // Log the received data for debugging
+    console.log("technologies", technologies);
+    console.log(name, description, projectLink, imageLink, technologies, githubLink, liveLink);
+
+    // Validate required fields
+    if (!name || !description || !projectLink || !technologies.length || !imageLink) {
       return NextResponse.json(
         { message: "Please fill all the fields" },
         { status: 400 }
       );
     }
 
+    // Upload image to Cloudinary
     const img = await uploadOnCloudinary(imageLink, "projectImage");
 
+    // Create a new project in the database
     const project = await Project.create({
       name,
       description,
       projectLink,
       technologies,
-      imageLink: img.secure_url,
+      imageLink: img.secure_url, // Use the secure URL from Cloudinary
       githubLink,
       liveLink,
     });
-
-    project.save();
 
     return NextResponse.json(
       {

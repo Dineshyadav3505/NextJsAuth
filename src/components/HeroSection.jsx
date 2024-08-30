@@ -11,8 +11,8 @@ const HeroSection = () => {
     transition={{ duration: 1, delay: 4 }}
     className=" h-[200px] md:h-[400px] select-none flex flex-col pt-10 md:pt-36 text-left items-center ">
       <div className="">
-        <h6 className="text-xl md:text-5xl">👋Hello,</h6>
-        <h3 className="text-xl md:text-5xl md:py-3 md:pl-24  capitalize">I&#39;m Dinesh yadav.</h3>  
+        <h6 className="text-4xl md:text-5xl">👋Hello,</h6>
+        <h3 className="text-4xl md:text-5xl md:py-3 md:pl-24  capitalize">I&#39;m Dinesh yadav.</h3>  
       </div>
     </motion.div>
     

@@ -27,7 +27,7 @@ const HomePage = () => {
         <div className=" relative p-4 md:p-8 flex flex-col gap-10">
           <HeroSection />
           <motion.div
-            initial={{ height: 300 }}
+            initial={{ height: 800 }}
             animate={{ height: 0 }}
             transition={{ duration: 0.5, delay: 5 }}
             className="w-full "
