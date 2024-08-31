@@ -18,6 +18,7 @@ export async function POST(req) {
       );
     }
 
+    // Fetch user from the database
     const dataBaseUser = await User.findById(id);
     if (!dataBaseUser || dataBaseUser.role !== "admin") {
       return NextResponse.json(
@@ -26,12 +27,16 @@ export async function POST(req) {
       );
     }
 
+    // Parse form data
     const formData = await req.formData();
-    const name = formData.get("name");
-    const description = formData.get("description");
-    const imageLink = formData.get("imageLink");
-    const githubLink = formData.get("githubLink");
-    const liveLink = formData.get("liveLink");
+    const { name, description, imageLink, githubLink, liveLink } = {
+      name: formData.get("name"),
+      description: formData.get("description"),
+      imageLink: formData.get("imageLink"),
+      githubLink: formData.get("githubLink"),
+      liveLink: formData.get("liveLink"),
+    };
+
     const technologies = formData.getAll("technologies");
 
     // Validate required fields
@@ -44,7 +49,7 @@ export async function POST(req) {
 
     // Upload image to Cloudinary
     const img = await uploadOnCloudinary(imageLink, "projectImage");
-
+    
     // Create a new project in the database
     const project = await Project.create({
       name,

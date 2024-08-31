@@ -163,10 +163,9 @@ export async function PATCH(req) {
 
     // Parse form data
     const formData = await req.formData();
-    const { name, description, projectLink, imageLink, githubLink, liveLink } = {
+    const { name, description, imageLink, githubLink, liveLink } = {
       name: formData.get("name"),
       description: formData.get("description"),
-      projectLink: formData.get("projectLink"),
       imageLink: formData.get("imageLink"),
       githubLink: formData.get("githubLink"),
       liveLink: formData.get("liveLink"),
@@ -175,7 +174,7 @@ export async function PATCH(req) {
     const technologies = formData.getAll("technologies");
 
     // Validate required fields
-    if (!name || !description || !projectLink || !technologies.length || !imageLink) {
+    if (!name || !description || !technologies.length || !imageLink) {
       return NextResponse.json(
         { message: "Please fill all the fields" },
         { status: 400 }

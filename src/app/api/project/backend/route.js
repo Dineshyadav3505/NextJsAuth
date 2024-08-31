@@ -29,7 +29,7 @@ export async function POST(req) {
 
     // Parse form data
     const formData = await req.formData();
-    const { name, description, projectLink, imageLink, githubLink, liveLink } = {
+    const { name, description, imageLink, githubLink, liveLink } = {
       name: formData.get("name"),
       description: formData.get("description"),
       imageLink: formData.get("imageLink"),

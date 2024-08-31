@@ -14,7 +14,7 @@ export async function GET() {
       fullstackProject.find(),
     ]);
 
-    const projects = [...backendProjects, ...frontendProjects, ...fullstackProjects];
+    const projects = [...fullstackProjects,  ...frontendProjects, ...backendProjects];
 
 
     return NextResponse.json(projects);

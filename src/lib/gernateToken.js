@@ -11,7 +11,7 @@ export const options = {
 
 
 export function generateToken(id) {
-    console.log(process.env.NEXT_PUBLIC_JWT_SECRET)
+    
     const token = jwt.sign({id}, process.env.NEXT_PUBLIC_JWT_SECRET,{
         expiresIn: '1h'
     }

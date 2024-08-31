@@ -27,7 +27,7 @@ const Project = ({ projects }) => {
 
             <div className="md:w-[50%] flex flex-col justify-center">
               {/* Project Description */}
-              <h3 className=" text-base md:text-xl capitalize py-3 md:pr-4">
+              <h3 className=" text-sm md:text-base capitalize py-3 md:pr-4">
                 {project.description}
               </h3>
 

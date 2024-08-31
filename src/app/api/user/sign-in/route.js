@@ -7,7 +7,6 @@ import bcrypt from "bcryptjs";
 
 export async function POST(req, res) {
     dbConnect();
-    console.log("Request to login user");
 
     try {
 
@@ -28,10 +27,8 @@ export async function POST(req, res) {
         if(!hashPassword) {
             return NextResponse.json({message: "Please provide a valid Email & Password"}, {status: 400});
         }
-        console.log("first")
-
+   
         const token = generateToken(databaseUser._id);
-        console.log(token);
 
         const response = NextResponse.json({
             message: "User logged in successfully",
