@@ -3,7 +3,7 @@ import React from "react";
 
 const Project = ({ projects }) => {
   return (
-    <div className=" flex flex-col gap-20">
+    <div className=" flex flex-col gap-20 select-none">
       {projects.map((project, index) => (
         <div
           key={index}
@@ -19,7 +19,7 @@ const Project = ({ projects }) => {
           <div className=" md:flex md:h-[84%] gap-10 px-2 md:px-0">
             <div className=" h-[200px] md:h-full md:w-[50%] ">
               <img
-                className="w-full h-[100%] md:h-[100%] rounded md:rounded-none object-cover md:rounded-tr-lg"
+                className="w-full select-none h-[100%] md:h-[100%] rounded md:rounded-none object-cover md:rounded-tr-lg"
                 src={project.imageLink}
                 alt={project.name}
               />
