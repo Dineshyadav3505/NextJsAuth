@@ -3,54 +3,99 @@ import { motion, useAnimation, useInView } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-const ScalingDiv = () => {
+const ScalingDiv = ({ projects }) => {
   const controls = useAnimation();
   const ref = useRef(null);
   const isInView = useInView(ref, { margin: "0px", once: false });
-  const [ isHovered, setIsHovered ] = useState(false);
+  const [isHovered, setIsHovered] = useState(false); // Set default to false
 
+  // Handle mouse enter and leave events
   const handleMouseEnter = () => {
-    setIsHovered(!isHovered);
-  }
+    setIsHovered(true); // Set to true on hover
+  };
 
+  const handleMouseLeave = () => {
+    setIsHovered(false); // Reset on mouse leave
+  };
 
+  // Animation control based on view and hover state
   useEffect(() => {
     if (isInView) {
-      controls.start({ scale: 1, transition: { duration: 0.5 } });
+      controls.start({ scale: 1.1, transition: { duration: 0.5 } }); // Scale up when in view
     } else {
-      controls.start({ scale: 0.8, transition: { duration: 0.5 } });
+      controls.start({ scale: 1, transition: { duration: 0.5 } }); // Scale back to normal when out of view
     }
-  }, [controls, isInView]); 
+  }, [controls, isInView]);
+
+  // Animation control based on hover state
+  useEffect(() => {
+    if (isHovered) {
+      controls.start({ scale: 1.05, transition: { duration: 0.3 } }); // Scale slightly when hovered
+    } else {
+      controls.start({ scale: 1, transition: { duration: 0.3 } }); // Scale back to normal when not hovered
+    }
+  }, [controls, isHovered]);
 
   return (
-    <motion.div
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseEnter}
-      ref={ref}
-      initial={{ scale: 0.8 }}
-      animate={controls}
-      className="rounded-lg select-none w-full p-2 border-[rgba(114,112,112,0.5)] bg-[rgba(114,112,112,0.3)] border-[1px]"
-    >
-      <div className=" h-[500px] relative rounded-sm border-[rgba(114,112,112,0.5)] border-[1px]">
-        <img className="h-full w-full object-cover" src="https://images.unsplash.com/photo-1719937206220-f7c76cc23d78?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+    <>
+      {projects.map((proj) => (
+        <motion.div
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          ref={ref}
+          initial={{ scale: 1 }} // Initial scale
+          animate={controls} // Use animation controls
+          key={proj._id} // Use unique ID for key
+          className="rounded-lg select-none w-full mb-16 p-2 border-[rgba(114,112,112,0.5)] bg-[rgba(114,112,112,0.3)] border-[1px]"
+        >
+          <div className="h-[500px] relative rounded-sm border-[rgba(114,112,112,0.5)] border-[1px]">
+            <img
+              className="h-full w-full object-cover"
+              src={proj.imageLink} // Use dynamic image link
+              alt={proj.name}
+            />
 
-        {isHovered && <div className=" absolute bottom-0 w-full md:flex p-2">
-          <div className=" w-full">
-            <p className="text-xl drop-shadow-[0_0px_15px_rgba(0,0,0,1)] py-2 ">Project Name  </p>
-            <div className=" flex items-center gap-2">
-            <p className="text-sm drop-shadow-[0_0px_15px_rgba(0,0,0,1)] px-3 py-1 border-[1px] inline-block rounded-md capitalize "> react.js</p>
-            <p className="text-sm drop-shadow-[0_0px_15px_rgba(0,0,0,1)] px-3 py-1 border-[1px] inline-block rounded-md capitalize "> react.js</p>
-            </div>
-
+            {isHovered && (
+              <div className="absolute bottom-0 w-full md:flex p-2">
+                <div className="w-full">
+                  <p className="text-xl drop-shadow-[0_0px_15px_rgba(0,0,0,1)] py-2">{proj.name}</p>
+                  <div className="flex items-center gap-2">
+                    {proj.technologies.map((tech, techIndex) => (
+                      <p
+                        key={techIndex}
+                        className="text-sm drop-shadow-[0_0px_15px_rgba(0,0,0,1)] px-3 py-1 border-[1px] inline-block rounded-md capitalize"
+                      >
+                        {tech}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex flex-col justify-center items-end py-3 md:py-0 md:w-1/3">
+                  {proj.githubLink && (
+                    <Link
+                      className="w-full px-3 py-1 border-[1px] inline-block rounded-md duration-300 capitalize drop-shadow-[0_0px_15px_rgba(0,0,0,1)] hover:bg-black bg-[rgba(114,112,112,0.3)] text-sm"
+                      href={proj.githubLink} // Use dynamic link
+                      target="_blank"
+                    >
+                      GitHub Link
+                    </Link>
+                  )}
+                  {proj.liveLink && (
+                    <Link
+                      className="w-full px-3 py-1 border-[1px] inline-block rounded-md duration-300 capitalize drop-shadow-[0_0px_15px_rgba(0,0,0,1)] hover:bg-black bg-[rgba(114,112,112,0.3)] text-sm"
+                      href={proj.liveLink} // Use dynamic link
+                      target="_blank"
+                    >
+                      Live Link
+                    </Link>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
-         <div className=" flex flex-col justify-center items-end py-3 md:py-0 md:w-1/3">
-           <Link className=" w-full px-3 py-1 border-[1px] inline-block rounded-md duration-300 capitalize  drop-shadow-[0_0px_15px_rgba(0,0,0,1)] hover:bg-black bg-[rgba(114,112,112,0.3)] text-sm" href="/" target="_blanck">github link </Link>
-           <Link className=" w-full px-3 py-1 border-[1px] inline-block rounded-md duration-300 capitalize  drop-shadow-[0_0px_15px_rgba(0,0,0,1)] hover:bg-black bg-[rgba(114,112,112,0.3)] text-sm" href="/" target="_blanck">github link </Link>
-         </div>
-
-        </div>}
-      </div>
-    </motion.div>
+        </motion.div>
+      ))}
+    </>
   );
 };
 
