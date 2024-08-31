@@ -50,6 +50,10 @@ const Footer = () => {
           url: "https://www.linkedin.com/in/dinesh-yadav-6aa877198",
         },
         {
+          name: "Email",
+          url: "mailto:dineshydv3505@gmail.com",
+        },
+        {
           name: "github",
           url: "https://github.com/Dineshyadav3505",
         },

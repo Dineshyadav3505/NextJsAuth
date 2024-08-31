@@ -38,14 +38,13 @@ const Navbar = () => {
     setNav(!nav);
   };
 
-  
   return (
-    <motion.nav 
-    initial={{ opacity: 0, y:"-100px" }}
-    animate={{ opacity: 1, y:0 }}
-    transition={{ duration: 1, delay: 2 }}
-    className=" select-none fixed z-20 top-0 w-full py-5 flex justify-between px-2 md:px-10 items-center">
-
+    <motion.nav
+      initial={{ opacity: 0, y: "-100px" }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, delay: 2 }}
+      className=" select-none fixed z-20 top-0 w-full py-5 flex justify-between px-2 md:px-10 items-center"
+    >
       {/* logo */}
       <div className="py-2 px-3 flex justify-start items-center gap-3">
         <div className="border-[rgba(114,112,112,0.5)] bg-[rgba(114,112,112,0.3)] border-[1px] px-2 p-1 rounded">
@@ -125,10 +124,7 @@ const Navbar = () => {
           label={"linkedIn"}
           link={"https://www.linkedin.com/in/dinesh-yadav-6aa877198"}
         />
-        <ButtonOne
-          label={"github"}
-          link={"https://github.com/Dineshyadav3505"}
-        />
+        <ButtonOne label={"Email"} link={"mailto:dineshydv3505@gmail.com"} />
         <ButtonOne label={"Resume"} link={resume} />
       </div>
 
@@ -137,7 +133,7 @@ const Navbar = () => {
         <motion.div
           layout="true"
           initial={{ opacity: 0, height: 2, width: 2 }}
-          animate={{ opacity: 1, height: 120, width: 170 }}
+          animate={{ opacity: 1, height: 160, width: 170 }}
           transition={{ duration: 0.5 }}
           className=" absolute z-10 top-24 flex flex-col justify-center items-center right-3 bg-[rgba(114,112,112,0.6)] border-[1px] rounded-md border-[rgba(114,112,112,0.7)] p-1 "
         >
@@ -148,6 +144,10 @@ const Navbar = () => {
           <ButtonThree
             label={"github"}
             link={"https://github.com/Dineshyadav3505"}
+          />
+          <ButtonThree
+            label={"Email"}
+            link={"mailto:dineshydv3505@gmail.com"}
           />
           <ButtonThree label={"resume"} link={resume} />
         </motion.div>
