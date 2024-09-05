@@ -19,7 +19,7 @@ const Project = ({ projects }) => {
           <div className=" md:flex md:h-[84%] gap-10 px-2 md:px-0">
             <div className=" h-[200px] md:h-full md:w-[50%] ">
               <img
-                className="w-full select-none h-[100%] md:h-[100%] rounded md:rounded-none object-cover md:rounded-tr-lg"
+                className="w-full select-none h-full md:h-[100%] rounded md:rounded-none object-cover object-left-top md:rounded-tr-lg"
                 src={project.imageLink}
                 alt={project.name}
               />
