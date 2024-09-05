@@ -3,11 +3,14 @@ import Aboutme from "@/components/Aboutme";
 import Skills from "@/components/Skills";
 import React, { useEffect } from "react";
 import Anim from "@/components/Anim";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const page = () => {
 
   return (
     <>
+    <Navbar/>
     <Anim/>
     <div className="min-h-screen py-28 lg:px-52">
       <div className="p-4 md:p-8">
@@ -16,6 +19,7 @@ const page = () => {
         <Skills/>
       </div>
     </div>
+    <Footer/>
     </>
   );
 };
