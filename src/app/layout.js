@@ -1,7 +1,5 @@
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import LocomotiveScrollProvider from "@/components/LocomotiveScrollProvider";
 
 export const metadata = {
@@ -15,9 +13,7 @@ export default function RootLayout({ children }) {
       <body className="text-xl font-Comic_Neue bg-black text-white">
         <ThemeProvider attribute="class" className="">
           <LocomotiveScrollProvider>
-            <Navbar />
             {children}
-            <Footer />
           </LocomotiveScrollProvider>
         </ThemeProvider>
       </body>
