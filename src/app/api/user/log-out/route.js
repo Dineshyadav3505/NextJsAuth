@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 
-export async function GET() {
+export async function GET(request) {
     try {
         const response = NextResponse.json(
             {
@@ -9,6 +9,7 @@ export async function GET() {
                 success: true,
             }
         )
+
         response.cookies.set("accessToken", "", 
         { httpOnly: true, expires: new Date(0) 
         });
