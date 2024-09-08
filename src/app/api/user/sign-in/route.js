@@ -29,16 +29,9 @@ export async function POST(req, res) {
         console.log("Database User 1", databaseUser);   
         console.log("Database User 1", databaseUser.password);
 
-        try {
-            const isMatch = await bcrypt.compare(password, databaseUser.password);
-            console.log(isMatch); // Will log true or false
-        } catch (error) {
-            console.error('Error comparing passwords:', error);
-        }
+        const hashPassword = await bcrypt.compare(password, databaseUser.password);
 
-        // const hashPassword = await bcrypt.compare(password, databaseUser.password);
-
-        // console.log(hashPassword)
+        console.log(hashPassword)
 
         if(!hashPassword) {
             return NextResponse.json({message: "Please provide a valid Email & Password"}, {status: 400});
@@ -64,8 +57,8 @@ export async function POST(req, res) {
 
         response.cookies.set("accessToken", token, options);
 
+        console.log(response);
         return response;
-
 
         
     } catch (error) {
