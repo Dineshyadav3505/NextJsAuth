@@ -10,10 +10,7 @@ export default async function auth(req) {
     req.headers.get("Authorization")?.replace("Bearer ", "");
 
   if (!accessToken) {
-    return NextResponse.json(
-      { message: "You are not authorized to access this route" },
-      { status: 401 }
-    );
+    return null;
   }
 
   const decoded = jwt.verify(accessToken, process.env.NEXT_PUBLIC_JWT_SECRET);
