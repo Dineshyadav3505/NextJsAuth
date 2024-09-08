@@ -5,16 +5,7 @@ import { useRouter } from "next/navigation";
 
 const LogOut = () => {
   const [error, setError] = useState(null);
-  const [isUserLoggingIn, setIsUserLoggingIn] = useState(false);
   const router = useRouter();
-
-
-  useEffect(() => {
-    const token = localStorage.getItem("_kodingmonk");
-    if (token) {
-      setIsUserLoggingIn(true);
-    }
-  }, []);
 
   const logOut = async () => {
     try {
@@ -40,7 +31,7 @@ const LogOut = () => {
 
   return (
     <>
-      {isUserLoggingIn && (
+
         <div
           onClick={logOut}
           role="button"
@@ -66,7 +57,6 @@ const LogOut = () => {
           </svg>
           Log Out
         </div>
-      )}
     </>
   );
 };

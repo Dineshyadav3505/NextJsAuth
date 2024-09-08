@@ -27,13 +27,11 @@ const SignIn = () => {
       });
 
       const data = await response.json(); // Parse the response data
+      console.log(data);
 
       if (!response.ok) {
         throw new Error(data.message); // Throw an error if the response is not ok
       }
-
-      setUser(data.user);
-      localStorage.setItem("_kodingmonk", data.token+"ksdfeDWs3s4");
 
       if(data.user.role === "admin") {
         router.push("/admin/dashboard");
