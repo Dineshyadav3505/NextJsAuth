@@ -42,7 +42,7 @@ function ProjectForm({ mode = "create", existingProject = {} }) {
 
     try {
       const response = await fetch(
-        `/api/project/backend${
+        `/api/project/frontend${
           mode === "update" ? `?id=${existingProject._id}` : ""
         }`,
         {
@@ -65,7 +65,7 @@ function ProjectForm({ mode = "create", existingProject = {} }) {
   return (
     <div className="min-h-screen flex justify-center items-center space-y-5">
       <div className="py-24">
-      <h1 className="text-2xl font-bold text-center bg-violet-600 my-10 rounded capitalize">Backend</h1>
+      <h1 className="text-2xl font-bold text-center bg-violet-600 my-10 rounded capitalize">frontend</h1>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <Input
           type="text"
