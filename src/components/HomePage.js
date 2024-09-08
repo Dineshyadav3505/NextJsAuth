@@ -2,7 +2,7 @@
 import Anim from "@/components/Anim";
 import { Spotlight } from "@/components/ui/Spotlight";
 import ScalingDiv from "@/components/Project";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import HeroSection from "@/components/HeroSection";
 import { motion } from "framer-motion";
 
@@ -12,35 +12,38 @@ const HomePage = () => {
   const [project, setProject] = useState([]);
   const [error, setError] = useState(null);
 
-  // Use useEffect to set inView after 2 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
       setInView(true);
     }, 2000);
 
-    return () => clearTimeout(timer); // Cleanup on unmount
+    return () => clearTimeout(timer);
   }, []);
 
-  // Fetch project data on component mount
-  useEffect(() => {
-    const fetchProject = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch("api/project/allproject");
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        setProject(data); // Set the project data
-      } catch (err) {
-        setError(err.message); // Set error message
-      } finally {
-        setLoading(false);
+  const fetchProject = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("api/project/allproject");
+      if (!response.ok) {
+        throw new Error(`HTTP error ${response.status}: ${response.statusText}`);
       }
-    };
-
-    fetchProject();
+      const data = await response.json();
+      setProject(data);
+    } catch (err) {
+      setError({
+        code: err.name,
+        message: "An error occurred while fetching project data.",
+      });
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    if (project.length === 0) {
+      fetchProject();
+    }
+  }, [project, fetchProject]);
 
   return (
     <>
@@ -61,7 +64,11 @@ const HomePage = () => {
             transition={{ duration: 0.5, delay: 5 }}
             className="w-full"
           ></motion.div>
-          <ScalingDiv projects={project} /> {/* Pass projects to ScalingDiv */}
+          {error ? (
+            <div className="text-red-500">{error.message}</div>
+          ) : (
+            <ScalingDiv projects={project} />
+          )}
         </div>
       </div>
     </>

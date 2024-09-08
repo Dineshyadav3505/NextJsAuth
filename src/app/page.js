@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import React from "react";
 
 
-const MianPage = () => {
+const MainPage = () => {
 
   return (
     <>
@@ -18,4 +18,4 @@ const MianPage = () => {
   );
 };
 
-export default MianPage;
+export default MainPage;
