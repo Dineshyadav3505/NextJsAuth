@@ -27,6 +27,7 @@ export async function POST(req, res) {
         }
 
         console.log("Database User 1", databaseUser);   
+        console.log("Database User 1", databaseUser.password);
 
         const hashPassword = await bcrypt.compare(password, databaseUser.password);
 
