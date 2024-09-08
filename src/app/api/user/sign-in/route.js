@@ -27,14 +27,18 @@ export async function POST(req, res) {
 
         const hashPassword = await bcrypt.compare(password, databaseUser.password);
 
+        console.log(hashPassword)
+
         if(!hashPassword) {
             return NextResponse.json({message: "Please provide a valid Email & Password"}, {status: 400});
         }
+
+        console.log("Database User 2", databaseUser);
    
         const token = generateToken(databaseUser._id);
 
         console.log("Token", token);
-        console.log("Database User", databaseUser);
+        console.log("Database User 2", databaseUser);
 
         const response = NextResponse.json({
             message: "User logged in successfully",

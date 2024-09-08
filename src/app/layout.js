@@ -1,6 +1,7 @@
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import LocomotiveScrollProvider from "@/components/LocomotiveScrollProvider";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata = {
   title: "KodingMonk",
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
         <ThemeProvider attribute="class" className="">
           <LocomotiveScrollProvider>
             {children}
+            <SpeedInsights />
           </LocomotiveScrollProvider>
         </ThemeProvider>
       </body>
