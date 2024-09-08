@@ -20,10 +20,13 @@ export async function POST(req, res) {
         console.log("Password", password);
 
         const databaseUser  = await User.findOne({email})
+        console.log("Database User0", databaseUser);
 
         if (!databaseUser) {
             return NextResponse.json({message: "Please provide a valid Email & Password"}, {status: 404});
         }
+
+        console.log("Database User 1", databaseUser);   
 
         const hashPassword = await bcrypt.compare(password, databaseUser.password);
 
@@ -38,7 +41,7 @@ export async function POST(req, res) {
         const token = generateToken(databaseUser._id);
 
         console.log("Token", token);
-        console.log("Database User 2", databaseUser);
+        console.log("Database User 3", databaseUser);
 
         const response = NextResponse.json({
             message: "User logged in successfully",
