@@ -25,9 +25,7 @@ export async function middleware(request) {
       return NextResponse.redirect(new URL('/', request.url));
     }
 
-    // Optionally, you can process the response data here
     const userData = await response.json();
-    // You can store user data in a cookie or pass it along in the request if needed
 
     return NextResponse.next();
 

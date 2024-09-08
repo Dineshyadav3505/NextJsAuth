@@ -16,6 +16,9 @@ export async function POST(req, res) {
             return NextResponse.json({message: "Please provide Email & Password"}, {status: 400});
         }
 
+        console.log("Email", email);
+        console.log("Password", password);
+
         const databaseUser  = await User.findOne({email})
 
         if (!databaseUser) {
@@ -29,6 +32,9 @@ export async function POST(req, res) {
         }
    
         const token = generateToken(databaseUser._id);
+
+        console.log("Token", token);
+        console.log("Database User", databaseUser);
 
         const response = NextResponse.json({
             message: "User logged in successfully",
